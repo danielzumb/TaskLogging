@@ -1,3 +1,4 @@
+import { time } from "console";
 import * as path from "path";
 const Datastore = require("nedb");
 
@@ -6,16 +7,17 @@ export interface ITask {
     name: string,
     subject: string,
     time: number,
-    comments: string | null
+    comments: string | null | undefined
 }
 
-//TODO: Request JSON Body validator
-export function isTask(arg: any): boolean {
-    let returnBool: boolean = true;
-    console.log(JSON.parse(arg));
-
-    
-    return returnBool;
+export function formatTask(arg: ITask): ITask {
+    let formatBody: ITask = {
+        name: arg.name,
+        subject: arg.subject,
+        time: arg.time,
+        comments: arg.comments
+    }
+    return formatBody;
 }
 
 export class Worker {
@@ -63,10 +65,12 @@ export class Worker {
         return new Promise((resolve, reject) => {
             try {
                 taskBody.forEach(task => {
-                    console.log(task);
-                    this.db.insert(task, (err: Error | null, newDoc: ITask) => {
+                    const newTask: ITask = formatTask(task);                    
+                    this.db.insert(newTask, (err: Error | null, newDoc: ITask) => {
                         if(err) {
                             reject(err);
+                        } else {
+                            console.log(newTask);
                         }
                     });
                 });
