@@ -1,3 +1,6 @@
+# Build outputs
+server/build
+
 # Logs
 logs
 *.log
