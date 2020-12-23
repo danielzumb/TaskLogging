@@ -36,16 +36,6 @@ class Server {
 
     // API Endpoints
     private getRoutes = (): void => {
-        
-        // Initial API page
-        // this.app.get('/api/', 
-        //     async(req: Request, res: Response) => {
-        //         try{
-        //             res.send('API endpoint!');
-        //         }catch(err){
-        //             res.send(err);
-        //         }
-        //     });
 
         // POST tasks - Log task(s)
         this.app.post('/api/tasks', 
@@ -53,8 +43,8 @@ class Server {
                 try{
                     console.log("POST tasks -> " + req.body);
                     const tasksWorker: Tasks.Worker = new Tasks.Worker();
-                    const task: ITask = await tasksWorker.addTask(req.body);
-                    res.json(task);
+                    await tasksWorker.addTask(req.body);
+                    res.send("task logged");
                 }catch(err){
                     res.status(500);
                     res.send("Error encountered: " + err);

@@ -9,6 +9,7 @@ export interface ITask {
     comments: string | null
 }
 
+//TODO: Request JSON Body validator
 export function isTask(arg: any): boolean {
     let returnBool: boolean = true;
     console.log(JSON.parse(arg));
@@ -43,6 +44,7 @@ export class Worker {
     // Get a task from db based on id, return task
     public getTask(taskID: string): Promise<ITask> {
         return new Promise((resolve, reject) => {
+            console.log(taskID);
             this.db.findOne({_id: taskID}, (err: Error | null, doc: ITask) => {
                 if(err) {
                     reject(err);
@@ -56,15 +58,22 @@ export class Worker {
     }
 
     // Add task to db, return task ID
-    public addTask(taskBody: ITask): Promise<ITask> {
+    public addTask(taskBody: ITask[]): Promise<string> {
+        console.log(taskBody.length)
         return new Promise((resolve, reject) => {
-            this.db.insert(taskBody, (err: Error | null, newDoc: ITask) => {
-                if(err) {
-                    reject(err);
-                } else {
-                    resolve(newDoc);
-                }
-            });
+            try {
+                taskBody.forEach(task => {
+                    console.log(task);
+                    this.db.insert(task, (err: Error | null, newDoc: ITask) => {
+                        if(err) {
+                            reject(err);
+                        }
+                    });
+                });
+                resolve("newDoc");
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 
@@ -98,4 +107,5 @@ export class Worker {
             });
         });
     }
+
 }
