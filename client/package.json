@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.tsx",
   "scripts": {
     "build": "webpack --mode production"
   },
@@ -16,7 +16,8 @@
     "axios": "^0.21.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@webpack-cli/init": "^1.0.3",

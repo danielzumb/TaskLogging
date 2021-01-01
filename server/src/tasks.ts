@@ -76,7 +76,7 @@ export class Worker {
                 });
                 resolve("newDoc");
             } catch (error) {
-                reject(error);
+                reject("Malformed request body");
             }
         });
     }
