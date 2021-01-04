@@ -5,9 +5,19 @@
 	width: 100vw;
     height: 100vh;
     background-color: #121212;
+    color: white;
 }
 
 .welcomePage {
     grid-column: 2;
     grid-row: 2;
+}
+
+.toolbar {
+    width: 100vw;
+	grid-row: 1/1;
+	border-bottom: 3px solid #40069c;
+	padding-top: 8px;
+    padding-left: 4px;
+    background-color: rgb(198, 130, 238);
 }

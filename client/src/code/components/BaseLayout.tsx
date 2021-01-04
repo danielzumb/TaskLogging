@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 // App imports
 import WelcomeView from"./WelcomeView";
+import ContentView from"./ContentView";
+
 import LoggingView from"./LoggingView";
 import ReportingView from"./ReportingView";
 
@@ -11,14 +13,14 @@ class BaseLayout extends Component {
     state = createState(this);
 
     render(){
+        const showWelcome = this.state.showWelcome;
+        console.log("showWelcome: " + showWelcome);
         return (
             <div className="appContainer">
-                {this.state.currentView === "welcome" && <WelcomeView state={this.state} />}
-
-                <div className="centerArea">
-                    {this.state.currentView === "logging" && <LoggingView state={this.state}/>}
-                    {this.state.currentView === "reporting" && <ReportingView state={this.state}/>}
-                </div>
+                {showWelcome
+                    ? <WelcomeView state={this.state} />
+                    : <ContentView state={this.state} />
+                }    
             </div>
         )
     }

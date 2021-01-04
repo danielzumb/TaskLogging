@@ -1,16 +1,21 @@
 export function createState(parentComponent){
     return {
 
-        currentView: "welcome",
+        showWelcome: true,
+        currentView: null,
 
         showTaskPage: function(this: any, visible: boolean): void {
-            console.log("Showing task page");
-            this.setState({currentView: "logging"});
+            this.setState({
+                showWelcome: false,
+                currentView: "logging"
+            });
         }.bind(parentComponent),
 
         showReportingPage: function(this: any, visible: boolean): void {
-            console.log("Showing reporting page");
-            this.setState({currentView: "reporting"});
+            this.setState({
+                showWelcome: false,
+                currentView: "reporting"
+            });
         }.bind(parentComponent)
     }
 }
